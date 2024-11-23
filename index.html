@@ -9,7 +9,7 @@
   <body>
     <form onsubmit="save(event)">
         <div class="mb-3">
-            <label for="NawaFirmy" class="form-label">Nazwa Firmy</label>
+            <label for="NazwaFirmy" class="form-label">Nazwa Firmy</label>
             <input type="text" id="NazwaFirmy" class="form-control" aria-describedby="NazwaFirmyHelpBlock" required>
         </div>
         <div class="mb-3">    
@@ -25,7 +25,7 @@
             <input type="text" id="Ulica" class="form-control" aria-describedby="UlicaHelpBlock" required>
         </div>
         <div class="mb-3">
-            <label for="exampleFormUwagi" class="form-label">Uwagi</label>
+            <label for="Uwagi" class="form-label">Uwagi</label>
             <textarea class="form-control" id="Uwagi" rows="3"></textarea>
         </div>
         <div class="mb-3">
@@ -38,25 +38,59 @@
         </div>
         <div class="mb-3" class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="Check">
-            <label class="form-check-label" for="flexCheckDefault">
+            <label class="form-check-label" for="Check">
               Aktywny
             </label>
         </div>
-    <input class="btn btn-primary" type="submit" value="Save">
-
+    <input class="btn btn-primary" type="submit" value="Save" id="buttonSave">
+    <input class="btn btn-secondary" type="button" value="Insert Default" id="buttonInsert">
+ 
     <script>
         function save(e){
             e.preventDefault()
-            console.log(document.getElementById("NazwaFirmy").value);
-            console.log(document.getElementById("NIP").value);
-            console.log(document.getElementById("Miasto").value);
-            console.log(document.getElementById("Ulica").value);
-            console.log(document.getElementById("Uwagi").value);
-            console.log(document.getElementById("Branza").value);
-            console.log(document.getElementById("Check").checked);
+            // console.log(document.getElementById("NazwaFirmy").value);
+            // console.log(document.getElementById("NIP").value);
+            // console.log(document.getElementById("Miasto").value);
+            // console.log(document.getElementById("Ulica").value);
+            // console.log(document.getElementById("Uwagi").value);
+            // console.log(document.getElementById("Branza").value);
+            // console.log(document.getElementById("Check").checked);
+            const formData = {
+                nazwaFirmy: document.getElementById("NazwaFirmy").value,
+                nip: document.getElementById("NIP").value,
+                miasto: document.getElementById("Miasto").value,
+                ulica: document.getElementById("Ulica").value,
+                uwagi: document.getElementById("Uwagi").value,
+                branza: document.getElementById("Branza").value,
+                check: document.getElementById("Check").checked
+            };
+            console.log(formData);
+
         }
 
-    
+        function insertData() {
+                // Wstaw dane do formularza
+                document.getElementById("NazwaFirmy").value = "Default";
+                document.getElementById("NIP").value = "1234";
+                document.getElementById("Miasto").value = "Default";
+                document.getElementById("Ulica").value = "Default 10";
+                document.getElementById("Uwagi").value = "None";
+                document.getElementById("Branza").value = "2";
+                document.getElementById("Check").checked = true;
+
+                // Zablokuj pola formularza
+                document.getElementById("NazwaFirmy").disabled = true;
+                document.getElementById("NIP").disabled = true;
+                document.getElementById("Miasto").disabled = true;
+                document.getElementById("Ulica").disabled = true;
+                document.getElementById("Uwagi").disabled = true;
+                document.getElementById("Branza").disabled = true;
+                document.getElementById("Check").disabled = true;
+
+                console.log("Default data");
+        }
+        document.getElementById("buttonInsert").addEventListener("click", insertData);
+
     </script>
     
     </form>
