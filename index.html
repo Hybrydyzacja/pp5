@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form_12_10_2024</title>
     <link href="style.css" rel="stylesheet">
+    <script scr="script.js"></script>
   </head>
   <body>
-    <form onsubmit="save(event)">
+    <form onsubmit="save(event)" id="client-form">
         <div class="mb-3">
             <label for="NazwaFirmy" class="form-label">Nazwa Firmy</label>
             <input type="text" id="NazwaFirmy" class="form-control" aria-describedby="NazwaFirmyHelpBlock" required>
@@ -44,10 +45,25 @@
         </div>
     <input class="btn btn-primary" type="submit" value="Save" id="buttonSave">
     <input class="btn btn-secondary" type="button" value="Insert Default" id="buttonInsert">
+    
+
+
+    <div class="client-list">
+        <ul class="list-group" id="client-list">
+        </ul>   
+        <button type="button" class="btn btn-info" onclick="showClientForm()">Dodaj nowego klienta</button> 
+    </div>
+
+    <div class="form" id="client-form" style="display: none;">
+    </div>
+    
  
     <script>
-        function save(e){
-            e.preventDefault()
+        var customerList = [];
+
+
+        // function save(e){
+        //     e.preventDefault()
             // console.log(document.getElementById("NazwaFirmy").value);
             // console.log(document.getElementById("NIP").value);
             // console.log(document.getElementById("Miasto").value);
@@ -55,18 +71,32 @@
             // console.log(document.getElementById("Uwagi").value);
             // console.log(document.getElementById("Branza").value);
             // console.log(document.getElementById("Check").checked);
-            const formData = {
-                nazwaFirmy: document.getElementById("NazwaFirmy").value,
-                nip: document.getElementById("NIP").value,
-                miasto: document.getElementById("Miasto").value,
-                ulica: document.getElementById("Ulica").value,
-                uwagi: document.getElementById("Uwagi").value,
-                branza: document.getElementById("Branza").value,
-                check: document.getElementById("Check").checked
+            // let newCustomer = newCustomer() {
+            //     nazwaFirmy: document.getElementById("NazwaFirmy").value,
+            //     nip: document.getElementById("NIP").value,
+            //     miasto: document.getElementById("Miasto").value,
+            //     ulica: document.getElementById("Ulica").value,
+            //     uwagi: document.getElementById("Uwagi").value,
+            //     branza: document.getElementById("Branza").value,
+            //     check: document.getElementById("Check").checked
+            // };
+            // console.log(formData);
+            // showCustomer();
+        // }
+
+        function save(e){
+            e.preventDefault()
+            let newCustomer = newCustomer();
+                newCustomer.nazwaFirmy = document.getElementById("NazwaFirmy").value;
+                newCustomer.nip = document.getElementById("NIP").value;
+                newCustomer.miasto = document.getElementById("Miasto").value;
+                newCustomer.ulica = document.getElementById("Ulica").value;
+                newCustomer.uwagi = document.getElementById("Uwagi").value;
+                newCustomer.branza = document.getElementById("Branza").value;
+                newCustomer.check = document.getElementById("Check").checked;
             };
             console.log(formData);
-
-        }
+            showCustomer();
 
         function insertData() {
                 // Wstaw dane do formularza
@@ -90,6 +120,26 @@
                 console.log("Default data");
         }
         document.getElementById("buttonInsert").addEventListener("click", insertData);
+
+
+       
+        let ul = document.getElementById("client-list");
+        console.log(customerList)
+        ul.innerHTML = ''
+        for(let customer of customerList){
+            ul.innerHTML += `<li class="list-group-item">${client.name} ${client.nip}<li>`;
+        }
+
+        function showClientForm(){
+            document.getElementById("client-form").style.display = "block";
+            document.getElementById("client-list").style.display = "none";
+        }
+
+        function showClientList(){
+            document.getElementById("client-form").style.display = "none";
+            document.getElementById("client-list").style.display = "block";
+        }
+
 
     </script>
     
